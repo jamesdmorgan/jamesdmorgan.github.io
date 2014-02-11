@@ -8,7 +8,7 @@ url:              http://localhost:4000
 owner:
   name:           James Morgan
   avatar:         bio-photo.jpg
-  bio:            "Describe your self."
+  bio:            "Software Engineer and Toast Enthusiast"
   email:          jamesdmorgan@gmail.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
   twitter:        jamesdmorgan
