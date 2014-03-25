@@ -8,7 +8,7 @@ modified: 9-9-2013
 image:
   feature: branches-feature.jpg
 ---
-## Purposes of this blog
+## Right now
 
 The blog is currently an experiment with Jekyll & Github pages. If it were the late 90's I would have an under constuction logo... I aim to post information which I hope will be useful to others 
 involved in Continuous Integration, Maven, Sonar, Jenkins etc. 
