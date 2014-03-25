@@ -30,16 +30,13 @@ complexity and uncovered many obsure issues. It has taken lots of digging.
 ## Goal of this site
 My aim is to share some of the knowledge I have learnt working with "legacy" applications and systems and to plan out how I go about open sourcing some of the code I have written.
 <br/>
-As my work has progressed the solution has matured and in some places is more elegant than many answers posted on stack overflow etc. So I thought it was time I shared them.
-<br/>
 Maven is usually associated with Java projects but its quite capable of providing the lifecycle for any type of application.
 
 ## Continuous integration pipeline
-In implementing the following pipeline I have had to created numerous connectors and even built a xUnit framework. I plan on detailing things i've learnt in the hope
-that it could prove useful.
+In implementing the following pipeline I have had to created numerous connectors and built a xUnit framework. I aim to open source this in the coming months. 
 
 * Jenkins with standard Maven jobs
-* Maven with custom Ant plugin for packaging non-standard application
+* Maven with custom Java / Ant plugin for packaging non-standard application
 * Maven lifecycle invokes custom TCL xUnit mocking framework for unit testing.
 * Publishes artefacts to Sonar for analysis and Artifactory
 * Aggregate Maven project consumes artefacts and creates publishes full system
@@ -54,8 +51,9 @@ The majority of the work has been on the unit testing / mocking framework and th
   * Cloning jobs
   * Building custom jobs
 * Building release notes and communicating with Confluence
+* REST communication with Artifactory
 
-The plugin uses both the Ant contrib packages and xmltask additions all pulled in nicely as Maven dependencies.
+The plugin uses both the Ant contrib packages, groovy and xmltask additions all pulled in nicely as Maven dependencies.
 
 <br/>
 The plugin also provides a menu system for common automated tasks such as preparing a project for a release and defect workflows. I have generally tried to
