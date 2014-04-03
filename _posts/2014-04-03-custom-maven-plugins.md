@@ -72,7 +72,6 @@ There are a couple of major limitations using Maven/Plexus & Ant which i'll cove
 # Splitting up the plugin
 Currently the plugin covers a range of tasks
 <br/>
-<br/>
 
 * Testing TCL applications
 * Packaging non-standard applications
@@ -87,7 +86,6 @@ Currently the plugin covers a range of tasks
 My plan is to break apart the plugin
 <br/>
 * Integrate the TCL unit testing framework into surefire
-
 * Create a plugin dedicated to Jenkins / Artifactory functionality
 
 Whilst the majority of the code is encapsulated and separates business logic from functionality there would still need to be an amount of work before anything could be open sourced.
