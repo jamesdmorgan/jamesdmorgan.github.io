@@ -48,7 +48,7 @@ In implementing the following pipeline I have had to created numerous connectors
 * Maven invokes custom plugin for packaging non-standard applications
 * Maven lifecycle invokes custom TCL xUnit mocking framework for unit testing.
 * Built artefacts are published to Artifactory & Sonar for analysis
-* Aggregate Maven project consumes artefacts and creates full system ready for deployment
+* Aggregate Maven project consumes artefacts and creates full build ready for deployment
 * Jenkins deploys system to Virtual Machines via SSH Publish & custom scripts.
 
 The majority of the work has been on the unit testing / mocking framework and the Maven plugin. The plugin contains an Ant library of macros which handle
