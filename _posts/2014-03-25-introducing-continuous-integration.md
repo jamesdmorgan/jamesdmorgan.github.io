@@ -32,7 +32,8 @@ were mostly written in TCL which has a very small if non-existent community and 
 
 <br/>
 When researching CI/CD for this project most examples I found cater for modern languages / frameworks and source control. Each non-standard component has added extra
-complexity and uncovered many obsure issues. It has taken lots of digging.
+complexity and uncovered many obsure issues. It has taken lots of digging. Having to think about CVS support as well as git & svn complicates matters
+
 
 
 ## Goal of this site
@@ -44,7 +45,7 @@ Maven is usually associated with Java projects but its quite capable of providin
 In implementing the following pipeline I have had to created numerous connectors and built a xUnit framework. I aim to open source this in the coming months.
 
 * Jenkins with standard Maven jobs
-* Maven with custom plugin for packaging non-standard application
+* Maven invokes custom plugin for packaging non-standard applications
 * Maven lifecycle invokes custom TCL xUnit mocking framework for unit testing.
 * Built artefacts are published to Artifactory & Sonar for analysis
 * Aggregate Maven project consumes artefacts and creates full system ready for deployment
