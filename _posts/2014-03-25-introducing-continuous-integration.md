@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Initial Upload
-description: "Building a pipeline"
+title: Building a pipeline
+description: "Quick overview of the kind of CI tasks i've been involved in"
 modified: 2014-03-25
 category: continuous-integration
 tags: [intro, maven, jenkins, ci]

@@ -11,6 +11,6 @@ image:
 ## Right now
 
 The blog is currently an experiment with Jekyll & Github pages. If it were the late 90's I would have an under constuction logo...
-
+<br/>
 I aim to post information which I hope will be useful to others involved in Continuous Integration, Maven, Sonar, Jenkins etc.
 
