@@ -85,6 +85,7 @@ Currently the plugin covers a range of tasks
 <br/>
 My plan is to break apart the plugin
 <br/>
+
 * Integrate the TCL unit testing framework into surefire
 * Create a plugin dedicated to Jenkins / Artifactory functionality
 
