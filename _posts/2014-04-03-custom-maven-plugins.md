@@ -31,7 +31,7 @@ deploying the built applications to Artifactory. Since many of the Java applicat
 Ivy also had issues with classifiers, which helped change the approach.
 <br/><br/>
 All non-standard parts of the build were now handled by a collection of Ant tasks. This was necessary since I was building applications that
-has no Maven support. The Ant scripts were released to a shared NFS partition. They weren't properly versioned and really needed to be consumed as a Maven dependency.
+have no Maven support. The Ant scripts were released to a shared NFS partition. They weren't properly versioned and really needed to be consumed as a Maven dependency.
 
 
 # Building on top of Ant
@@ -82,8 +82,7 @@ Currently the plugin covers a range of tasks
 * Confluence integration for release notes and wiki pages
 
 <br/>
-<br/>
-My plan is to break apart the plugin
+My plan is to break apart the plugin:-
 <br/>
 
 * Integrate the TCL unit testing framework into surefire
