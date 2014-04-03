@@ -43,7 +43,7 @@ and tools to communicate with Jenkins & Confluence.
 ## Limitations of Ant Mojos
 At the time of creating Ant based mojos the functionality available was slightly more limited than the annotations available in the Java mojos.
 One of the major limitations other than the verbose mojo definitions was accessing the Maven project properties from within the Ant execution. This is a real problem
-if you need to access properties that can't be defined in advance. The *antrun* plugin does this for you by pre-populating ant properties.
+if you need to access properties that can't be defined in advance. The <b>antrun</b> plugin does this for you by pre-populating ant properties.
 
 ## Contrib, Macros & Scriptdefs
 
@@ -53,11 +53,10 @@ Using the contrib package simplified a great deal of the tasks with the use of i
 were organised as a nested collection of xml files includes and calling tasks conflicted.
 <br/><br/>
 Moving to using macros and scriptdefs added the next level of control. If you are restricted with using Ant I would opt for this approach.
-The next evolution was adding the *&lt;groovy&gt;* task.
+The next evolution was adding the <b>&lt;groovy&gt;</b> task.
 
 # Java & Groovy mojos
-The first Java mojo came about as a need to unpack the plugins dependencies. It utilised Tim Moore's [Mojo Executor]( https://github.com/TimMoore/mojo-executor).
-
+The first Java mojo came about as a need to unpack the plugins dependencies. It utilises Tim Moore's [Mojo Executor]( https://github.com/TimMoore/mojo-executor).
 This allowed me to pass the list of artifacts as a configuration through and execute the Maven Dependency plugin Unpack mojo.
 
 # Migrating Ant tasks to Groovy
@@ -76,17 +75,11 @@ Currently the plugin covers a range of tasks
 <br/>
 
 * Testing TCL applications
-
 * Packaging non-standard applications
-
 * Building manifests
-
 * Automating workflows, Source control management
-
 * Jenkins job creation and configuration for Sonar
-
 * Artifactory REST support for tagging and searching
-
 * Confluence integration for release notes and wiki pages
 
 <br/>
