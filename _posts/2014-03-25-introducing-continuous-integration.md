@@ -44,11 +44,11 @@ Maven is usually associated with Java projects but its quite capable of providin
 In implementing the following pipeline I have had to created numerous connectors and built a xUnit framework. I aim to open source this in the coming months.
 
 * Jenkins with standard Maven jobs
-* Maven with custom Java / Ant plugin for packaging non-standard application
+* Maven with custom plugin for packaging non-standard application
 * Maven lifecycle invokes custom TCL xUnit mocking framework for unit testing.
-* Publishes artefacts to Sonar for analysis and Artifactory
-* Aggregate Maven project consumes artefacts and creates publishes full system
-* Jenkins deploys system to VMWare Virtual Machines
+* Built artefacts are published to Artifactory & Sonar for analysis
+* Aggregate Maven project consumes artefacts and creates full system ready for deployment
+* Jenkins deploys system to Virtual Machines via SSH Publish & custom scripts.
 
 The majority of the work has been on the unit testing / mocking framework and the Maven plugin. The plugin contains an Ant library of macros which handle
 
