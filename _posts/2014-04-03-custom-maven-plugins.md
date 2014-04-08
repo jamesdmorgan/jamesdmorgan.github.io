@@ -6,7 +6,7 @@ modified: 2014-04-03
 category: continuous-integration
 tags: [maven, java, ant, groovy]
 image:
-  feature: texture-feature-05.jpg
+  feature: texture-feature-rust-02.jpg
   credit: Texture Lovers
   creditlink: http://texturelovers.com
 ---
