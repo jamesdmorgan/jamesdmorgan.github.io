@@ -16,7 +16,7 @@ comments: true
 
 ## Gitolite
 
-### Add permissions to adhoc repo
+###### Add permissions to adhoc repo
 
 {% highlight css %}
 ssh git@git.openbet perms -h
