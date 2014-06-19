@@ -3,21 +3,30 @@ layout: post
 title: Git Cheat Sheet
 description: "Cheat Sheet for Git & Gitolite"
 tags: [sample post, code, highlighting]
+link: http://stackoverflow.com/questions/501407/is-there-a-git-merge-dry-run-option
 comments: true
 ---
 
+<section id="table-of-contents" class="toc">
+  <header>
+    <h3>Contents</h3>
+  </header>
+<div id="drawer" markdown="1">
+*  Auto generated table of contents
+{:toc}
+</div>
+</section><!-- /#table-of-contents -->
+
 ## Git
 
-
+###### Emulate CVS merge without committing or `fast forward:http://stackoverflow.com/questions/501407/is-there-a-git-merge-dry-run-option`
 {% highlight css %}
-
+git merge --no-commit --no-ff $BRANCH
 {% endhighlight %}
-
 
 ## Gitolite
 
 ###### Add permissions to adhoc repo
-
 {% highlight css %}
 ssh git@git.openbet perms -h
 {% endhighlight %}
