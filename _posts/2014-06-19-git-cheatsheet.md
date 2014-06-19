@@ -43,4 +43,4 @@ permissions to create it).
 Examples:
     cat copy-of-backed-up-gl-perms | ssh git@host perms <repo>
     cat copy-of-backed-up-gl-perms | ssh git@host perms -c <repo>
-{% highlight css %}
+{% endhighlight %}
