@@ -19,7 +19,7 @@ comments: true
 
 ## Git
 
-###### Emulate CVS merge without committing or `fast forward:http://stackoverflow.com/questions/501407/is-there-a-git-merge-dry-run-option`
+###### Emulate CVS merge without committing or [fast forward](http://stackoverflow.com/questions/501407/is-there-a-git-merge-dry-run-option)
 {% highlight css %}
 git merge --no-commit --no-ff $BRANCH
 {% endhighlight %}
