@@ -26,9 +26,9 @@ git merge --no-commit --no-ff $BRANCH
 
 ## Gitolite
 
-###### Add permissions to adhoc repo
+###### Add permissions to adhoc [wild](http://gitolite.com/gitolite/wild.html) repo
 {% highlight css %}
-ssh git@git.openbet perms -h
+ssh git@host perms -h
 {% endhighlight %}
 
 {% highlight css %}
