@@ -30,7 +30,7 @@ from
   sysdatabases ,
   syssessions
 where
-  syslocks.tabname = "sysdatabases"     -- Find locks on sysdatabases
+  syslocks.tabname = "sysdatabases"       -- Find locks on sysdatabases
 and syslocks.rowidlk = sysdatabases.rowid -- Join rowid to database
 and syslocks.owner   = syssessions.sid    -- Session ID to get user info
 and sysdatabases.name like '%'
