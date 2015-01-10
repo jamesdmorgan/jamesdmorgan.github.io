@@ -37,6 +37,7 @@ Docker containers are created and in theory should move through the test phases 
 [Immutable Servers]( http://martinfowler.com/bliki/ImmutableServer.html)<br/>
 [Amazon EC2 AMI creation with Aminator](http://techblog.netflix.com/2013/03/ami-creation-with-aminator.html)<br/>
 <br/><br/>
+
 ## Issues
 
 The idea of immutable environments is a powerful one, though there are complications that need to be considered. Especially when you are dealing with vast monolithic systems and different deployment approaches through the deployment pipeline.
@@ -49,6 +50,7 @@ I don't see this as an all-or-nothing problem. If we adopt a mixed approach of m
 <br/><br/>
 Until the monolith is broken up the complexity and scale is too big to transition the entire system through to production. Even if we don't consider the database at this stage.
 <br/><br/>
+
 ## Current continuous deployment approach
 
 We are currently treating all hosts in the same way. Bare metal boxes, VMWare virtualised environments and Amazon EC2 hosts. This allows us to ensure the same process is used for all environments.
