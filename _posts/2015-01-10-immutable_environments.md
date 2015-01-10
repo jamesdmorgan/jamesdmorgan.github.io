@@ -33,9 +33,9 @@ This extends the concept of build once , deploy anywhere that is applied to the 
 <br/><br/>
 Docker containers are created and in theory should move through the test phases into production without changing. Similarly Amazon AMI images can be created locally based on pre-defined AMIs, composed in a similar way to Dockers layered filesystem approach and deployed to Amazon.
 <br/><br/>
-[Immutable deployments](http://blog.codeship.com/immutable-deployments/) Simple overview on the concepts
-[Immutable Servers]( http://martinfowler.com/bliki/ImmutableServer.html)
-[Amazon EC2 AMI creation with Aminator](http://techblog.netflix.com/2013/03/ami-creation-with-aminator.html)
+[Immutable deployments](http://blog.codeship.com/immutable-deployments/) Simple overview on the concepts<br/>
+[Immutable Servers]( http://martinfowler.com/bliki/ImmutableServer.html)<br/>
+[Amazon EC2 AMI creation with Aminator](http://techblog.netflix.com/2013/03/ami-creation-with-aminator.html)<br/>
 <br/><br/>
 ## Issues
 
