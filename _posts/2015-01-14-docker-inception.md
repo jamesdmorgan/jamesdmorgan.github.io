@@ -30,7 +30,7 @@ Ansible can provide us a base Docker image available in the [registry](https://r
 ## Useful resources
 
 * [Gotchas with Dockerfiles](http://kimh.github.io/blog/en/docker/gotchas-in-writing-dockerfile-en/)<br/>
-*
+
 
 ## Ansible bootstrapped Dockerfile
 
@@ -50,7 +50,10 @@ RUN pip install ansible
 
 A similar approach is descriped in this post [installing-and-building-docker-with-ansible](http://www.ansible.com/2014/02/12/installing-and-building-docker-with-ansible)
 
-## Adding call to local playbook and install Packer
+## Calling local Ansible playbook and installing Packer
+
 
 {% gist ansible-packer.yml %}
+
+![](/images/icons/github-32px.png)[Github example](https://github.com/jamesdmorgan/ansible-docker-packer)
 
