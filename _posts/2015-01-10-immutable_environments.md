@@ -36,6 +36,8 @@ Docker containers are created and in theory should move through the test phases 
 [Immutable deployments](http://blog.codeship.com/immutable-deployments/) Simple overview on the concepts<br/>
 [Immutable Servers]( http://martinfowler.com/bliki/ImmutableServer.html)<br/>
 [Amazon EC2 AMI creation with Aminator](http://techblog.netflix.com/2013/03/ami-creation-with-aminator.html)<br/>
+[Packer.io](http://packer.io)<br/>
+[Hootsuite Example](http://code.hootsuite.com/build-test-and-automate-server-image-creation/) Build test and automate server image creation<br/>
 <br/><br/>
 
 ## Issues
