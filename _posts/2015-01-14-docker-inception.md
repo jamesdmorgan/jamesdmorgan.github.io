@@ -52,5 +52,5 @@ A similar approach is descriped in this post [installing-and-building-docker-wit
 
 ## Adding call to local playbook and install Packer
 
-{% gist 458fbeb5afa8c627380e %}
+{% gist ansible-packer.yml %}
 
