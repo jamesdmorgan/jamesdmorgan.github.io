@@ -19,14 +19,18 @@ tags: [ansible, packer, docker]
 
 ## Ansible building docker to build docker containers with ansible?
 
-Why would I want to do this?
+Why would I want to do this?<br/>
 
 We need a standardised environment that has Ansible and Packer installed in order to build Docker & Amazon AMI images. <br/>
 
-This environment may as well be a Docker container, which we may as well build using Ansible as it allows us to keep the Dockerfile simple.
+This environment may as well be a Docker container, which we may as well build using Ansible as it allows us to keep the Dockerfile simple.<br/>
 
-Ansible can provide us a base Docker image available in the [registry](https://registry.hub.docker.com/repos/ansible/)
+Ansible can provide us a base Docker image available in the [registry](https://registry.hub.docker.com/repos/ansible/)<br/>
 
+## Useful resources
+
+* [Gotchas with Dockerfiles](http://kimh.github.io/blog/en/docker/gotchas-in-writing-dockerfile-en/)<br/>
+*
 
 ## Ansible bootstrapped Dockerfile
 
@@ -43,3 +47,10 @@ RUN mkdir /etc/ansible/
 RUN echo '[local]\nlocalhost\n' > /etc/ansible/hosts
 RUN pip install ansible
 {% endhighlight %}
+
+A similar approach is descriped in this post [installing-and-building-docker-with-ansible](http://www.ansible.com/2014/02/12/installing-and-building-docker-with-ansible)
+
+## Adding call to local playbook and install Packer
+
+{% gist 458fbeb5afa8c627380e %}
+
