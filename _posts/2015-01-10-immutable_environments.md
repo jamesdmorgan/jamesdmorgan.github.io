@@ -76,6 +76,7 @@ Using the concepts of immutable environments I aim to build the AMI locally and 
 
 We have developed our Ansible playbooks and roles such that applications can be moved and grouped easily whilst still ensuring they are correctly glued together
 <br/><br/>
+
 * Apache configuration on the web tier
 * Site management configuration
 * Services on the hosts
