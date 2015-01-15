@@ -33,11 +33,16 @@ This extends the concept of build once , deploy anywhere that is applied to the 
 <br/><br/>
 Docker containers are created and in theory should move through the test phases into production without changing. Similarly Amazon AMI images can be created locally based on pre-defined AMIs, composed in a similar way to Dockers layered filesystem approach and deployed to Amazon.
 <br/><br/>
+
+## Links and references
 [Immutable deployments](http://blog.codeship.com/immutable-deployments/) Simple overview on the concepts<br/>
 [Immutable Servers]( http://martinfowler.com/bliki/ImmutableServer.html)<br/>
 [Amazon EC2 AMI creation with Aminator](http://techblog.netflix.com/2013/03/ami-creation-with-aminator.html)<br/>
-[Packer.io](http://packer.io)<br/>
 [Hootsuite Example](http://code.hootsuite.com/build-test-and-automate-server-image-creation/) Build test and automate server image creation<br/>
+[Packer](https://packer.io/) Packer is a tool for creating identical machine images for multiple platforms from a single source configuration.<br/>
+[Immutable Systems with Ansible](http://www.ansible.com/blog/immutable-systems)<br/>
+[Ansible + Packer](http://blog.codeship.com/packer-ansible/)<br/>
+[Ansible + Packer EBS AMI](https://github.com/kelseyhightower/packer-provisioner-ansible-local)<br/>
 <br/><br/>
 
 ## Issues
@@ -63,6 +68,12 @@ One of the downsides of this current approach when dealing with Amazon is that t
 <br/><br/>
 Using the concepts of immutable environments I aim to build the AMI locally and upload a new image. Thus reducing the amount of work that is carried out in California.
 <br/><br/>
+
+**Update 15/01/15** From doing more research both Packer.io & Aminator both work on the instance in the cloud instead of allowing local operation. This is a real shame as it means that all the software needs to be available in the cloud via Yum. I will continue investigating this. Options at the moment are<br/>
+
+* Look are reducing cost by building AMIs in layers as opposed to building the stack in one go. This is sensible anyway and the playbooks are split to facilitate this.
+* Provision docker containers locally and publish these into either EBS EC2 instances or possibly ElasticBeanstalk. The later seems to have quite a few disadvantages according to this [post](http://stackoverflow.com/questions/25832554/amazon-elastic-beanstalk-vs-ec2-instance-with-docker-containers)
+
 We have developed our Ansible playbooks and roles such that applications can be moved and grouped easily whilst still ensuring they are correctly glued together
 <br/><br/>
 * Apache configuration on the web tier
@@ -72,7 +83,7 @@ We have developed our Ansible playbooks and roles such that applications can be 
 ## Development Ideas
 
 * Leverage standard build process with Ansible
-* Build docker containers and AMI images with packer.io using existing Ansible playbooks
+* Build docker containers and AMI images with [packer.io](https://packer.io/) using existing Ansible playbooks
 * Build base docker and AMI images via CI to reduce time to compose.
 * Deploying to test could involve uploading an AMI and allowing the customer to provision themselves.
 * Fig could provide a nice way of simplifying development on docker and building on pre-made containers.
