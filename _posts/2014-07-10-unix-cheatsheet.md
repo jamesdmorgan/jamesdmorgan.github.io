@@ -19,11 +19,30 @@ comments: true
 
 ## Useful commands
 
-###### Recursively remove CVS $header$ headers
+##### Recursively remove CVS $header$ headers
 {% highlight css %}
 for file in `find . -type f | xargs`
 do
     sed '/# $Header/d' $file > $file.new
     mv $file.new $file
 done
+{% endhighlight %}
+
+
+##### IP Whitelist apache virtual hosts
+
+The below code will only allow localhost access to the yum repos
+
+[Reference](http://blog.lysender.com/2013/02/white-listing-ip-addresses-for-your-apache-virtual-hosts/)
+
+{% highlight xml %}
+<Directory "/var/www/html/yum">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order deny,allow
+    Allow from 127.0.0.1
+    Allow from xxx.xxx.xxx.xxx
+    Allow from xxx.xxx.xxx.xxx
+    Deny from all
+</Directory>
 {% endhighlight %}
