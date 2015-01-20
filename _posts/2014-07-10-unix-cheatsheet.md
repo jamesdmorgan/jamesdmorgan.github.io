@@ -30,10 +30,7 @@ done
 
 
 ##### IP Whitelist apache virtual hosts
-
-The below code will only allow localhost access to the yum repos
-
-[Reference](http://blog.lysender.com/2013/02/white-listing-ip-addresses-for-your-apache-virtual-hosts/)
+The below code will only allow localhost access to the yum repos, example taken from [blog.lysender.com](http://blog.lysender.com/2013/02/white-listing-ip-addresses-for-your-apache-virtual-hosts/)
 
 {% highlight xml %}
 <Directory "/var/www/html/yum">
