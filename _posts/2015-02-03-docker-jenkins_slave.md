@@ -34,7 +34,7 @@ As we are using RHEL6 in production the slave will be based on Centos 6 as its t
 
 - TODO
 
-## SSH Demon configuration
+## SSH Daemon configuration
 
 The Docker container needs to run a sshd. Jenkins then treats the running container like a normal box. There are a number of changes that need to happen to the default **openssh-server** installation **sshd_config**
 
@@ -59,7 +59,7 @@ UsePAM no
 
 To validate the keys and sshd configuration is working before we connect Jenkins we should try and connect to the container<br/><br/>
 
-On the host VM start the container and open up the ssh port and start the sshd demon and syslog<br/>
+On the host VM start the container and open up the ssh port and start the sshd daemon and syslog<br/>
 
 {% highlight bash%}
 docker run --rm -p 49000:22 -it centos-slave:latest bash
