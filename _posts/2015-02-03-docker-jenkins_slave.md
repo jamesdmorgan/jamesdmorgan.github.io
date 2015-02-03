@@ -20,9 +20,9 @@ tags: [ansible, jenkins, docker]
 ## Jenkins Docker Slave
 
 The aim of the docker plugin is to be able to use a docker host to dynamically provision a slave, run a single build, then tear-down that slave.<br/>
-br/>
+<br/>
 This post will cover the different aspects of this and how to go about debugging it.br/>
-br/>
+<br/>
 As we are using RHEL6 in production the slave will be based on Centos 6 as its the closest base image.
 
 
