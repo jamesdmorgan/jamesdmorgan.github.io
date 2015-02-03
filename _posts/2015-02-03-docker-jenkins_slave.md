@@ -17,16 +17,13 @@ tags: [ansible, jenkins, docker]
 </div>
 </section><!-- /#table-of-contents -->
 
-## Jenkins Docker Slave
-
 The aim of the docker plugin is to be able to use a docker host to dynamically provision a slave, run a single build, then tear-down that slave.<br/>
 <br/>
 This post will cover the different aspects of this and how to go about debugging it.
 <br/>
 As we are using RHEL6 in production the slave will be based on Centos 6 as its the closest base image.
 
-
-## Useful resources
+### Useful resources
 
 * [Docker Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin)<br/>
 
@@ -51,6 +48,15 @@ AuthorizedKeysFile	.ssh/authorized_keys
 {% highlight bash%}
 UsePAM no
 #UsePAM yes
+{% endhighlight %}
+
+* Add a password to the builder *(jenkins)* user
+
+{% highlight yaml%}
+# Generate random password. Access will be via key though a password is needed
+- name: generate random password for user only on creation (needed for ssh)
+  shell: /usr/bin/openssl rand -base64 32 | passwd --stdin {{ builder_user }}
+  when: newuser.changed
 {% endhighlight %}
 
 -
