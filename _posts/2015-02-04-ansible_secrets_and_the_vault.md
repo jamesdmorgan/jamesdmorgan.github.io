@@ -19,7 +19,7 @@ tags: [ansible, vault, gpg, security]
 
 There are numerous ways to encrypt and share sensitive information. Projects such as [BlackBox](https://github.com/StackExchange/blackbox) , [Pass](http://www.passwordstore.org/) and [Ansible Vault](http://docs.ansible.com/playbooks_vault.html) do similar things. BlackBox has the added benefit that multiple people can access the sensitive information as long as they are on the same keyring using GPG
 <br/><br/>
-As Ansible is used as the main configuration management tool and will be to the tool that's manipulating the secret / sensitive information it makes sense to try and leverage vault. Thanks to John Knight the following [post](https://btl.gs/2014/09/01/using-ansible-vault-and-gpg-to-secure-critical-infrastructure-in-public-github-repositories/) covers off how to combine Ansible, GPG & Git to provide a similar but more integrated solution than Blackbox.
+As Ansible is used as the main configuration management tool and will be to the tool that's manipulating the secret / sensitive information it makes sense to try and leverage vault. The issue is that there is still a shared secret / password that needs to be considered. Thanks to John Knight the following [post](https://btl.gs/2014/09/01/using-ansible-vault-and-gpg-to-secure-critical-infrastructure-in-public-github-repositories/) covers off how to combine Ansible, GPG & Git to provide a similar but more integrated solution than Blackbox.
 <br/><br/>
 This post will build on that information and add extra background reading.
 
