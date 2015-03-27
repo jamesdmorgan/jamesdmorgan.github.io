@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Docker Resources
+title: Docker Resources for managing docker in production
 description: "Resources for managing docker in production"
 modified: 2015-03-25
 category: docker
@@ -18,9 +18,9 @@ tags: [docker]
 </section><!-- /#table-of-contents -->
 
 We are approaching the time that our customers are looking to really start leveraging the power of Docker and tackle the rather scary concept of Docker in production.
-
+<br/>
 There is quite a lot of information already available and many people tackling this problem. This is a collection of resources that will hopefully help with this process.
-
+<br/>
 I'll also build up a list of hurdles that need to be overcome.
 
 ## Resources 25/03
