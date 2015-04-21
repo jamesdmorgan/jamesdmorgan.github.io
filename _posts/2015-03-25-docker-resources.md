@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Docker Resources for managing docker in production
+title: Docker resources for managing docker in production
 description: "Resources for managing docker in production"
 modified: 2015-03-25
 category: docker
