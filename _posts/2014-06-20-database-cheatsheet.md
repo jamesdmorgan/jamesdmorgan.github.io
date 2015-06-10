@@ -37,4 +37,31 @@ and sysdatabases.name like '%'
 order by 1
 {% endhighlight %}
 
+###### What tables have a foreign key to a tables PK
+{% highlight css %}
+select
+  e.tabname,
+  g1.colname
+from
+  systables      a,
+  sysconstraints b,
+  sysreferences  c,
+  sysconstraints d,
+  systables      e,
+  sysindexes     f,
+  syscolumns     g1
+where
+  a.tabname      = 'TABLENAME'
+and a.tabid      = b.tabid
+and b.constrtype ='P'
+and b.constrid   = c.primary
+and b.tabid      = c.ptabid
+and c.constrid   = d.constrid
+and d.tabid      = e.tabid
+and e.tabid      = f.tabid
+and f.idxname    = d.idxname
+and f.tabid      = g1.tabid
+and abs(f.part1) = g1.colno
+{% highlight css %}
+
 ## PostgreSQL
