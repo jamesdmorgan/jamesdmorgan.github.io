@@ -62,6 +62,6 @@ and e.tabid      = f.tabid
 and f.idxname    = d.idxname
 and f.tabid      = g1.tabid
 and abs(f.part1) = g1.colno
-{% highlight css %}
+{% endhighlight %}
 
 ## PostgreSQL
