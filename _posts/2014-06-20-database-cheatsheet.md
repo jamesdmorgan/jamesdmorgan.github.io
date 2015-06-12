@@ -64,4 +64,52 @@ and f.tabid      = g1.tabid
 and abs(f.part1) = g1.colno
 {% endhighlight %}
 
+###### Adding a new dbspace (chunk)
+
+[Informix knowledge base](http://www-01.ibm.com/support/knowledgecenter/SSGU8G_12.1.0/com.ibm.adref.doc/ids_adr_0464.htm)
+
+Create the space
+{% highlight css %}
+touch /opt/informix_11.70/data/datadbs_02
+{% endhighlight %}
+
+{% highlight css %}
+chmod 660 /opt/informix_11.70/data/datadbs_02
+{% endhighlight %}
+
+Add the chunk
+{% highlight css %}
+onspaces \
+  -a datadbs \
+  -p /opt/informix_11.70/data/datadbs_02 \
+  -o 0
+  -s 2048000 # size of chunk in kb
+{% endhighlight %}
+
+Check the space is available and force a level 0 backup
+{% highlight css %}
+onstat -d
+ontape -s -L 0 -d > /dev/null
+{% endhighlight %}
+
+{% highlight css %}
+onstat -m
+{% endhighlight %}
+
+The following is a useful query to check the amount of free space
+{% highlight css %}
+select
+  name[1,8] dbspace,
+  sum(chksize) Pages_size,
+  sum(chksize) - sum(nfree) Pages_used,
+  sum(nfree) Pages_free,
+  round ((sum(nfree))/(sum(chksize))*100,2) percent_free
+from
+  sysdbspaces d, syschunks c
+where
+  d.dbsnum=c.dbsnum
+group by 1
+order by 1;
+{% endhighlight %}
+
 ## PostgreSQL
