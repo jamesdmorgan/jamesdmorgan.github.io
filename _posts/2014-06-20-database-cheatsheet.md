@@ -18,7 +18,7 @@ comments: true
 
 ## Informix
 
-###### Who is connected to a database (change wildcard)
+### Who is connected to a database (change wildcard)
 {% highlight css %}
 select
   sysdatabases.name database, -- Database Name
@@ -37,7 +37,7 @@ and sysdatabases.name like '%'
 order by 1
 {% endhighlight %}
 
-###### What tables have a foreign key to a tables PK
+### What tables have a foreign key to a tables PK
 {% highlight css %}
 select
   e.tabname,
@@ -64,9 +64,11 @@ and f.tabid      = g1.tabid
 and abs(f.part1) = g1.colno
 {% endhighlight %}
 
-###### Adding a new dbspace (chunk)
+### Adding a new dbspace (chunk)
 
-[Informix knowledge base](http://www-01.ibm.com/support/knowledgecenter/SSGU8G_12.1.0/com.ibm.adref.doc/ids_adr_0464.htm)
+#### Useful resources
+* [Informix knowledge base](http://www-01.ibm.com/support/knowledgecenter/SSGU8G_12.1.0/com.ibm.adref.doc/ids_adr_0464.htm)
+
 
 Create the space
 {% highlight css %}
