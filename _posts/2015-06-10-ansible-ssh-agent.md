@@ -21,7 +21,7 @@ tags: [ansible]
 ## Resources
 
 * [SSH Agent Forwarding](https://developer.github.com/guides/using-ssh-agent-forwarding/)<br/>
-* [SSH Through Bastion] (https://10mi2.wordpress.com/2015/01/14/using-ssh-through-a-bastion-host-transparently)<br/>
+* [SSH Through Bastion](https://10mi2.wordpress.com/2015/01/14/using-ssh-through-a-bastion-host-transparently)<br/>
 
 ## Ansible environment variables to forward SSH info through bastion
 {% highlight bash %}
