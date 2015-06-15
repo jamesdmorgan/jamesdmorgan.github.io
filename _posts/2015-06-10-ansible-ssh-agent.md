@@ -40,7 +40,7 @@ Host abc
     Hostname abc-bastion.cloudapp.net
 
 Host abc* !abc-bastion.cloudapp.net
-    ProxyCommand ssh az -W %h:%p
+    ProxyCommand ssh abc -W %h:%p
 {% endhighlight %}
 
 ## Automatically setup ssh-agent as part of bash session
