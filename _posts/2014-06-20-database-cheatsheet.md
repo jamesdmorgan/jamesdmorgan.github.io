@@ -24,6 +24,8 @@ select
   sysdatabases.name database, -- Database Name
   syssessions.username,       -- User Name
   syssessions.hostname,       -- Workstation
+  syssessions.pid,            -- Process ID
+  syssessions.feprogram,      -- Command / Application
   syslocks.owner sid          -- Informix Session ID
 from
   syslocks,
