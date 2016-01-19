@@ -4,7 +4,7 @@ title: Monitoring
 description: "Improved system monitoring ideas"
 modified: 2016-01-15
 category: monitoring
-tags: [nagios, incinga2, collectd, statsd, influxdb, grafana]
+tags: [nagios, incinga2, collectd, statsd, influxdb, grafana,elk]
 ---
 
 <section id="table-of-contents" class="toc">
@@ -23,11 +23,11 @@ tags: [nagios, incinga2, collectd, statsd, influxdb, grafana]
 Our current monitoring solution is based almost entirely around Nagios and custom NRPE scripts.
 There are pros and cons of using Nagios, though I am not going into that here. There are many [comparisons](http://phillbarber.blogspot.co.uk/2015/03/nagios-vs-sensu-vs-icinga2.html)
 on the internet.
-<br/>
+<br/><br/>
 We need a lightweight, scalable solution that is easy to configure and manage and provides mechanism for analysing the data and acting on it, not just collecting it. [Redefing monitoring](http://ryanfrantz.com/posts/solving-monitoring/)
-<br/>
+<br/><br/>
 I believe we also need to build on simply detecting errors to predicting them. We also collect a huge amount of valuable information in the logs. Quite a lot is structured. This information provides invaluable insight into customer behaviour.
-<br/>
+<br/><br/>
 Monitoring can be broken down in 4 main tasks
 
 * Collection
@@ -39,7 +39,7 @@ Monitoring can be broken down in 4 main tasks
 * Alerting
 
 We have a custom monitoring tool that runs on each client that parses the application logs and formats up messages for the NRPE daemon. This gets picked up by Nagios and routed back to a central server using NSCA.
-<br/>
+<br/><br/>
 Many customers manually manage their Nagios configuration. This is both unworkable and bad practice. As part of the new customer rollouts and moving to Infrastructure as code (entire stack is managed by Ansible) I converted the existing Nagios & NRPE configuration to Ansible roles. This has simplified the deployment of new servers though suffers from poor visualisation (currently nagiosgraph), performance, alerting.
 
 
@@ -48,7 +48,7 @@ Many customers manually manage their Nagios configuration. This is both unworkab
 ### Data storage
 
 The system produces a large amount of log data and metrics. We glean small amounts of information from the logs but only scratch the surface of the amount of useful data.
-<br/>
+<br/><br/>
 It is important that we identify what is important to treat as metrics and what we should do with the rest of the log data. The latter may be less useful for realtime monitoring of the system but could, if collected correctly add insight into customer behaviour and trends. [Discussions](https://discuss.elastic.co/t/elk-vs-grafana-influxdb/1686/6) on application log data vs metrics suggest that the data should be treated differently.
 
 > Grafana + InfluxDB for purely time series metrics (specifically, monitoring applications & servers), and ELK for monitoring/diagnostics against log file sources
@@ -60,7 +60,7 @@ ELK (Elastic Search / LogStash & Kibana ):
 * Kibana for powerful and beautiful data visualizations
 
 From reading reviews and comparisons Kibana seems to fall short when it comes to aggregation of building more complex queries. Grafana has [Elasticsearch](http://docs.grafana.org/datasources/elasticsearch/) support so it seems to make sense to use Grafana in place of Kibana.
-<br/>
+<br/><br/>
 I aim to focus primarily on metrics initially then move on to taming the log files.
 
 ### Metrics
