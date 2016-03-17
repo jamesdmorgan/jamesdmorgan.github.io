@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Monitoring
+title: Monitoring and Metrics
 description: "Improved system monitoring ideas"
 modified: 2016-01-15
 category: monitoring
@@ -77,7 +77,7 @@ Many of our clients have has success with a combination of using CollectD / Stat
 
 ### CollectD vs Telegraf?
 
-[Telegraf](https://github.com/influxdata/telegraf/blob/master/README.md) is written by InfluxDB and very new to the scene. It can receive stats from a number of plugins including StatsD and output to a host of services including InfluxDB. There seems [debate](https://news.ycombinator.com/item?id=9746698) on why another tools is needed when CollectD / StatsD already exist but it could given time provide a cleaner / simpler solution.
+[Telegraf](https://github.com/influxdata/telegraf/blob/master/README.md) is written by InfluxDB and very new to the scene. It can receive stats from a number of plugins including StatsD and output to a host of services including InfluxDB. There seems to be some [debate](https://news.ycombinator.com/item?id=9746698) on why another tools is needed when CollectD / StatsD already exist but it could given time provide a cleaner / simpler solution.
 
 ## Resources
 
