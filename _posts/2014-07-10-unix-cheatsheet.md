@@ -36,9 +36,9 @@ The above can be achieved more succinctly using perl. For example simple string 
 
 This would recursively find all yaml files and run sed expression doing in-place edit.
 
-> -e execute the following line of code.
-> -i edit in-place
-> -w write warnings
+> -e execute the following line of code.<br/>
+> -i edit in-place<br/>
+> -w write warnings<br/>
 > -p loop
 
 ##### IP Whitelist apache virtual hosts
