@@ -1,6 +1,6 @@
 # Site settings
-title: Jekyll-Uno
-description: 'James Morgan'
+title: James Morgan
+description: 'Software Engineer and Toast Enthusiast'
 url: 'http://jamesdmorgan.github.io'
 baseurl: '/'
 # google_analytics: 'UA-XXXXXX-X'
