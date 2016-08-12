@@ -2,7 +2,7 @@
   <i class="icon icon-list btn-mobile-menu__icon"></i>
   <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
 </span>
-  
+
 <header class="panel-cover" style="background-image: url({{ "images/cover.jpg" | prepend: site.baseurl }})">
   <div class="panel-main">
 
@@ -26,7 +26,7 @@
 
           <nav class="cover-navigation navigation--social">
             <ul class="navigation">
-          
+
             {% if site.author.twitter_username %}
               <!-- Twitter -->
               <li class="navigation__item">
@@ -37,12 +37,32 @@
               </li>
             {% endif %}
 
-            {% if site.author.facebook_username %}
+            {% if site.author.lastfm_username %}
               <!-- Facebook -->
               <li class="navigation__item">
-                <a href="http://fb.me/{{ site.author.facebook_username }}" title="{{ site.author.facebook_username }} on Facebook" target="_blank">
-                  <i class="icon icon-social-facebook"></i>
-                  <span class="label">Facebook</span>
+                <a href="http://last.fm/{{ site.author.lastfm_username }}" title="{{ site.author.lastfm_username }} on Last.fm" target="_blank">
+                  <i class="icon icon-social-lastfm"></i>
+                  <span class="label">Last.fm</span>
+                </a>
+              </li>
+            {% endif %}
+
+            {% if site.author.spotify_username %}
+              <!-- Facebook -->
+              <li class="navigation__item">
+                <a href="http://spotify.com/{{ site.author.spotify_username }}" title="{{ site.author.spotify_username }} on Spotify" target="_blank">
+                  <i class="icon icon-social-spotify"></i>
+                  <span class="label">Spotify</span>
+                </a>
+              </li>
+            {% endif %}
+
+            {% if site.author.flickr_username %}
+              <!-- Facebook -->
+              <li class="navigation__item">
+                <a href="http://flickr.com/photos/{{ site.author.flickr_username }}" title="{{ site.author.flickr_username }} on Flickr" target="_blank">
+                  <i class="icon icon-social-flickr"></i>
+                  <span class="label">Flickr</span>
                 </a>
               </li>
             {% endif %}
@@ -84,7 +104,7 @@
                 <span class="label">RSS</span>
               </a>
             </li>
-          
+
             </ul>
           </nav>
 
