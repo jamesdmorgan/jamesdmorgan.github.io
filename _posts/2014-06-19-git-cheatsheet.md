@@ -2,7 +2,7 @@
 layout: post
 title: Git Cheat Sheet
 description: "Cheat Sheet for Git & Gitolite"
-tags: [sample post, code, highlighting]
+tags: [git]
 link: http://stackoverflow.com/questions/501407/is-there-a-git-merge-dry-run-option
 comments: true
 ---
