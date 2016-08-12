@@ -1,65 +1,39 @@
-title:            James D Morgan
-tagline:          A short tagline
-description:
-# Your site's domain goes here. Leave localhost server or blank when working locally.
-url:              http://localhost:4000
-#url:              http://jamesdmorgan.github.io
+# Site settings
+title: Jekyll-Uno
+description: 'James Morgan'
+url: 'http://jamesdmorgan.github.io'
+baseurl: '/'
+# google_analytics: 'UA-XXXXXX-X'
+disqus_shortname: 'jamesdmorgan'
 
-# Owner/author information
-owner:
-  name:           James Morgan
-  avatar:         bio-photo.jpg
-  bio:            "Software Engineer and Toast Enthusiast"
-  email:          jamesdmorgan@gmail.com
-  # Social networking links are used in author-bio sidebar. Update and remove as you like.
-  twitter:        jamesdmorgan
-  facebook:       jdm2378
-  github:         jamesdmorgan
-  linkedin:       jdm2378
-  instagram:      jamesdmorgan
-  lastfm:         jamesdmorgan
-  tumblr:         jamesdmorgan
-  flickr:         dislocatedimagery
-  # For Google Authorship https://plus.google.com/authorship
-  google_plus:
+author:
+  name: 'James Morgan'
+  email: josh@jamesdmorgan.com
+  twitter_username: jamesdmorgan
+  facebook_username: jdm2378
+  github_username:  jamesdmorgan
+  linkedin_username:  jamesdmorgan
 
-# Analytics and webmaster tools stuff goes here
-google_analytics:
-google_verify:
-# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
-bing_verify:
+defaults:
+  -
+    scope:
+      path: ''
+      type: 'posts'
+    values:
+        layout: 'post'
 
-# Links to include in top navigation
-# For external links add external: true
-links:
-  - title: About
-    url: /about/
-  - title: Posts
-    url: /posts/
-
-# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    UK/London
-future:      true
-highligher:  pygments
-markdown:    kramdown
-gems:        [jekyll-gist]
-
-# https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink:   /:categories/:title/
+# Build settings
+destination: _site
+paginate: 10
+permalink: /:year/:title/
+markdown: kramdown
+highlighter: rouge
 
 kramdown:
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  enable_coderay: false
+  # use Github Flavored Markdown
+  input: GFM
+  # do not replace newlines by <br>s
+  hard_wrap: false
 
-  coderay:
-    coderay_line_numbers:
-    coderay_line_numbers_start: 1
-    coderay_tab_width: 4
-    coderay_bold_every: 10
-    coderay_css: class
-
-include: [".htaccess"]
-exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
+gems: ['jekyll-paginate', 'jekyll-gist']
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png']
