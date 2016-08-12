@@ -24,9 +24,11 @@ On the 21st July I left Openbet a place that I have both learnt a great deal and
 
 I am in a similar position now in that I will have a new machine. Most likely a Mac. I use Macs at home so I thought I ought to automate the setup of a new machine and apply it to my current one.
 
+> [https://github.com/jamesdmorgan/mac-dev-playbook](https://github.com/jamesdmorgan/mac-dev-playbook)
+
 ## Ansible
 
-I have been using Ansible a lot over the last couple of years and love it. I create a fairly basic playbook when I was provisioning my Ubuntu boxes. Googling around a handful of projects and shared Ansible roles handle many parts of the process including brew / brew cask for osx.
+I have been using Ansible a lot over the last couple of years and love it. I created a fairly basic playbook when I was provisioning my Ubuntu boxes. Googling around, a handful of projects and shared Ansible roles handle many parts of the process including brew / brew cask for osx. Everytime I install something I try and ensure its added to this project.
 
 The main inspiration for the approach to take was from [Jeff Geerling](https://github.com/geerlingguy). I forked his [mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook) project and adapted for my [needs](https://github.com/jamesdmorgan/mac-dev-playbook).
 
@@ -40,11 +42,11 @@ The dotfiles include .osx config settings
 
 ## Vim
 
-I have added a role to install and configure vim. It installs pathogen and bundles for things like nerdtree etc
+I have added a role to install and configure vim. It installs pathogen and bundles for things like nerdtree etc.
 
 ## Sublime
 
-Sublime is installed and configured. A handful of the things that are installed are
+Sublime is installed and configured. A handful of the packages that are installed are
 
 - Package control
 - SideBarEnhancements
