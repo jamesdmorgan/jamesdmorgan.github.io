@@ -88,7 +88,59 @@ Each area is managed by its own Ansible playbook which can be invoked using
 
 If you want the entire thing run consul, monitoring, logging, apps
 
+To log onto the boxes simply run
+
+```bash
+> vagrant ssh manager1
+Last login: Thu Aug 25 11:27:47 2016 from 10.0.2.2
+[vagrant@manager1 ~]$ sudo su
+[root@manager1 vagrant]#
+```
+
 ## Ansible
+
+### Idempotency
+One of Ansibles key features is that it's modules are (mostly) idempotent. I.e they can be re-run, if the desired effect is already achieved then it skips the task. Use of the shell modules causes a problem as its not idempotent if it changes the system.
+
+Ansible has released many new docker modules with the v2 release though it doesn't support Docker 1.12 service, networking yet. I have therefore used **shell** to query the current state and only run **shell** if the network or service hasn't been created. This doesn't allow for restarting but we will have to live with that at the moment.
+
+```yaml
+    - name: Get existing services
+      shell: >
+        docker service ls --filter name={{ item.name }} | tail -n +2
+      with_items: "{{ docker_services }}"
+      register: services_result
+
+    - set_fact:
+        docker_current_services: "{{ services_result.results | map(attribute='stdout') | list | join(' ') }}"
+```
+
+The example above formats up the response so we can easily search it later.
+
+The current docker command doesn't have any json options so we have to filter and strip the header
+
+```
+[root@manager1 vagrant]# docker service ls
+ID            NAME      REPLICAS  IMAGE                COMMAND
+3k1j6qxshlaq  collectd  global    collectd
+63cjh5tbg8gr  influxdb  1/1       tutum/influxdb:0.12
+```
+
+As we are checking multiple apps with with_items the json returned will have a list of dictionaries. The new [map](http://jinja.pocoo.org/docs/dev/templates/#map) filter allows us to select a value from a list of dicts.
+
+I then flatten this and turn it into a string which can be searched. We don't run the command if the service exists.
+
+```yaml
+  shell: >
+    docker service create \
+      --name {{ service_dict.name }} \
+      --env "CONSUL_SERVICE_PORT={{ service_dict.service_port | default(80) }}" \
+      --log-driver syslog \
+      --log-opt tag={{ docker_syslog_tag }} \
+      {{ service_dict.definition }}
+  when: service_dict.name not in docker_current_services
+```
+
 
 
 ## Docker Swarm
