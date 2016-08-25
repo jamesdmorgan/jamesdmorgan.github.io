@@ -105,6 +105,7 @@ One of Ansibles key features is that it's modules are (mostly) idempotent. I.e t
 Ansible has released many new docker modules with the v2 release though it doesn't support Docker 1.12 service, networking yet. I have therefore used **shell** to query the current state and only run **shell** if the network or service hasn't been created. This doesn't allow for restarting but we will have to live with that at the moment.
 
 ```yaml
+{% raw %}
     - name: Get existing services
       shell: >
         docker service ls --filter name={{ item.name }} | tail -n +2
@@ -113,6 +114,7 @@ Ansible has released many new docker modules with the v2 release though it doesn
 
     - set_fact:
         docker_current_services: "{{ services_result.results | map(attribute='stdout') | list | join(' ') }}"
+{% endraw %}
 ```
 
 The example above formats up the response so we can easily search it later.
@@ -131,6 +133,7 @@ As we are checking multiple apps with with_items the json returned will have a l
 I then flatten this and turn it into a string which can be searched. We don't run the command if the service exists.
 
 ```yaml
+{% raw %}
   shell: >
     docker service create \
       --name {{ service_dict.name }} \
@@ -139,6 +142,7 @@ I then flatten this and turn it into a string which can be searched. We don't ru
       --log-opt tag={{ docker_syslog_tag }} \
       {{ service_dict.definition }}
   when: service_dict.name not in docker_current_services
+{% endraw %}
 ```
 
 
