@@ -20,11 +20,13 @@ tags: [devops,vagrant,docker,ansible]
 
 ## Overview
 
-As discussed in the previous [post](http://jamesdmorgan.github.io/2016/opsdev/) I want to create a local enviroment that utilises many of the tools and architecture needed in production, such as **High Availability**, **Fault Tolerance**, **Service Discovery**, **Data Persistence**, **Centralised Logging** and  **Monitoring**
+As discussed in the previous [post](http://jamesdmorgan.github.io/2016/opsdev/) I want to create a local environment that utilises many of the tools and architecture needed in production, such as **High Availability**, **Fault Tolerance**, **Service Discovery**, **Data Persistence**, **Centralised Logging** and  **Monitoring**
 
 The underlying architecture for experimenting with the different tools will be the latest version of Docker Swarm (1.12) running on a number of VirtualBox virtual machines.
 
 > These blog posts will start with Vagrant and the swarm and iteratively add new components all via Ansible.
+
+The status of the project is detailed on the [Changelog](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm/blob/master/CHANGELOG.md)
 
 Every component in the system will be fully automated. I could have chosen to use **Docker Machine** to spin up the virtual machines but I chose to use Vagrant due to its clean integration with Ansible. Ansible then provisions each component in the system. In order to keep things modular the tools and tasks are grouped into logical areas
 
@@ -99,21 +101,35 @@ Last login: Thu Aug 25 11:27:47 2016 from 10.0.2.2
 
 ## Ansible
 
+Ansible was chosen as it provides a simple, easily readable way to automate the installation and configuration of each component. Vagrant auto-generates the inventory simplifying things further. We can then reference the boxes by the group hostvars information. Each area has its own playbook and the components are all abstracted away in roles.
+
+As mentioned above. Ansible can either by run via Vagrant provision or directly. I have created the following alias
+
+```bash
+alias ansible-vagrant='PYTHONUNBUFFERED=1 ANSIBLE_FORCE_COLOR=true ANSIBLE_HOST_KEY_CHECKING=false ANSIBLE_SSH_ARGS='\''-o UserKnownHostsFile=/dev/null -o IdentitiesOnly=yes -o ControlMaster=auto -o ControlPersist=60s'\'' ansible-playbook --connection=ssh --timeout=30 --inventory-file=.vagrant/provisioners/ansible/inventory'
+```
+
+which allows me to run individual playbooks from the root project directory. Its slightly faster and you can add extra verbosity / limits etc.
+
+```bash
+> ansible-vagrant ansible/monitoring.yml -vvv
+```
+
 ### Idempotency
-One of Ansibles key features is that it's modules are (mostly) idempotent. I.e they can be re-run, if the desired effect is already achieved then it skips the task. Use of the shell modules causes a problem as its not idempotent if it changes the system.
+One of Ansible's key features is that it's modules are (mostly) idempotent. I.e they can be re-run, if the desired effect is already achieved then it skips the task. Use of the shell modules causes a problem as its not idempotent if it changes the system.
 
 Ansible has released many new docker modules with the v2 release though it doesn't support Docker 1.12 service, networking yet. I have therefore used **shell** to query the current state and only run **shell** if the network or service hasn't been created. This doesn't allow for restarting but we will have to live with that at the moment.
 
 ```yaml
 {% raw %}
-    - name: Get existing services
-      shell: >
-        docker service ls --filter name={{ item.name }} | tail -n +2
-      with_items: "{{ docker_services }}"
-      register: services_result
+- name: Get existing services
+  shell: >
+    docker service ls --filter name={{ item.name }} | tail -n +2
+  with_items: "{{ docker_services }}"
+  register: services_result
 
-    - set_fact:
-        docker_current_services: "{{ services_result.results | map(attribute='stdout') | list | join(' ') }}"
+- set_fact:
+    docker_current_services: "{{ services_result.results | map(attribute='stdout') | list | join(' ') }}"
 {% endraw %}
 ```
 
@@ -134,14 +150,14 @@ I then flatten this and turn it into a string which can be searched. We don't ru
 
 ```yaml
 {% raw %}
-  shell: >
+shell: >
     docker service create \
       --name {{ service_dict.name }} \
       --env "CONSUL_SERVICE_PORT={{ service_dict.service_port | default(80) }}" \
       --log-driver syslog \
       --log-opt tag={{ docker_syslog_tag }} \
       {{ service_dict.definition }}
-  when: service_dict.name not in docker_current_services
+when: service_dict.name not in docker_current_services
 {% endraw %}
 ```
 
