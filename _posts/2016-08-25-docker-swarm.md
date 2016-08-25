@@ -103,7 +103,7 @@ Last login: Thu Aug 25 11:27:47 2016 from 10.0.2.2
 
 Ansible was chosen as it provides a simple, easily readable way to automate the installation and configuration of each component. Vagrant auto-generates the inventory simplifying things further. We can then reference the boxes by the group hostvars information. Each area has its own playbook and the components are all abstracted away in roles.
 
-As mentioned above. Ansible can either by run via Vagrant provision or directly. I have created the following alias
+As mentioned above. Ansible can either by run via `vagrant provision` or directly. I have created the following alias
 
 ```bash
 alias ansible-vagrant='PYTHONUNBUFFERED=1 ANSIBLE_FORCE_COLOR=true ANSIBLE_HOST_KEY_CHECKING=false ANSIBLE_SSH_ARGS='\''-o UserKnownHostsFile=/dev/null -o IdentitiesOnly=yes -o ControlMaster=auto -o ControlPersist=60s'\'' ansible-playbook --connection=ssh --timeout=30 --inventory-file=.vagrant/provisioners/ansible/inventory'
