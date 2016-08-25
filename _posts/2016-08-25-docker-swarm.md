@@ -119,7 +119,7 @@ The example above formats up the response so we can easily search it later.
 
 The current docker command doesn't have any json options so we have to filter and strip the header
 
-```
+```bash
 [root@manager1 vagrant]# docker service ls
 ID            NAME      REPLICAS  IMAGE                COMMAND
 3k1j6qxshlaq  collectd  global    collectd
