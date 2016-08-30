@@ -388,6 +388,8 @@ ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
 dv4fyiq4mbriyqrace841cybd    manager2  Ready   Active        Reachable
 [root@manager1 vagrant]#
 [root@manager1 vagrant]#
+
+
 [root@manager1 vagrant]# docker node help
 
 Usage:  docker node COMMAND
@@ -487,3 +489,5 @@ In order for our services to be able to communicate with each over across the di
     - appnet
 {% endraw %}
 ```
+
+## Next - [Service discovery](http://jamesdmorgan.github.io/2016/docker-service-discovery-consul/
