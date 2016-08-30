@@ -53,5 +53,20 @@ Since registrator does not currently handle services I decided to create a very 
 
 I am hoping that registrator will be fixed shortly and I can revert to using just that.
 
+### Provisioning Consul
+
+In the same way that we provisioned the docker swarm. Consul is installed on all nodes in the cluster. On the manager nodes its run as a **server** and on the **workers** as an **agent**. Running multiple servers adds redundancy and demonstrates the high availability functionality. In the same way as swarm we are running 3 servers in order to achieve Quorum.
+
+
+### Consul UI
+
+After provisioning consul via Vagrant or running Ansible directly you should be able access the UI
+```http://192.168.77.21:8500/ui```
+
+<img src="https://raw.githubusercontent.com/jamesdmorgan/vagrant-ansible-docker-swarm/master/images/consul/dashboard-api.png" width="100%">
+
+It will show itself and any other services you may have running. These will be covered in the next blog post.
+
+
 
 
