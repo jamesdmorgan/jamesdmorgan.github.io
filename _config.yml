@@ -3,7 +3,7 @@ title: James Morgan
 description: 'Software Engineer and firm believer in the holy trinity - Tea, Toast & Techno'
 url: 'http://jamesdmorgan.github.io'
 baseurl: '/'
-# google_analytics: 'UA-XXXXXX-X'
+google_analytics: 'UA-83357734-1'
 disqus_shortname: 'jamesdmorgan'
 
 author:
