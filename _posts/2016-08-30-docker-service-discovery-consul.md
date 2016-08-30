@@ -49,7 +49,7 @@ Registrator is a docker container that listens to the docker daemon for events a
 
 ### [Consul-notifier](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm/tree/master/consul-notifier)
 
-Since registrator does not currently handle services I decided to create a very simple python script that emulates registrator but listens to docker daemon events and uses port environment variables to register / de-register services.
+Since registrator does not currently handle services I decided to create a very simple python script that emulates registrator listening to the docker daemon events but uses port environment variables to register / de-register services.
 
 I am hoping that registrator will be fixed shortly and I can revert to using just that.
 
