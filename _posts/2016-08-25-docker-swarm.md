@@ -196,7 +196,7 @@ Before we run the swarm init command we establish whether there is an existing s
 {% endraw %}
 ```
 
-### Swarm manager
+### Swarm manager(s)
 
 Initially we start a swarm manager on the first **manager** host
 
@@ -296,7 +296,9 @@ Node updates should be performed on a manager node. In the above example we run 
 ```ruby
 TASK [Label nodes] *************************************************************
 task path: /Users/jamesdmorgan/Projects/vagrant-ansible-docker-swarm/ansible/swarm.yml:122
+
 skipping: [worker2] => (item=all_groups)  => {"changed": false, "item": "all_groups", "skip_reason": "Conditional check failed", "skipped": true}
+
 changed: [worker2 -> None] => (item=workers) => {"changed": true, "cmd": "docker node update --label-add workers=true worker2", "delta": "0:00:00.014551", "end": "2016-08-30 10:41:57.119466", "item": "workers", "rc": 0, "start": "2016-08-30 10:41:57.104915", "stderr": "", "stdout": "worker2", "stdout_lines": ["worker2"], "warnings": []}
 ```
 
