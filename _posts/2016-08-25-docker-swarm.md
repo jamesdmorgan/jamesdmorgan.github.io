@@ -161,6 +161,224 @@ when: service_dict.name not in docker_current_services
 {% endraw %}
 ```
 
-
-
 ## Docker Swarm
+
+Every virtual machine runs the latest (v1.12) version of Docker. Each host belongs to an Ansible group defined in the Vagrant file. This allows us to target specific types of boxes.
+
+Docker 1.12 is installed via curl as per the docker [release](https://github.com/docker/docker/releases/tag/v1.12.1) page. We only do this if there is no docker systemd service installed on the host.
+
+```yaml
+- name: Check existence of docker
+      stat: path=/usr/lib/systemd/system/docker.service
+      register: install_result
+
+- name: Install docker 1.12
+      shell: >
+        curl -fsSL https://get.docker.com/ | sh
+      when: not install_result.stat.exists
+
+    - name: Start docker service
+      service: name=docker state=started enabled=true
+```
+
+Before we run the swarm init command we establish whether there is an existing swarm running on this machine. Currently this is done by talking directly to the docker daemon. We know its running as docker as we have previously started it.
+
+```yaml
+{% raw %}
+- name: Check the docker status
+  no_log: true
+  shell: >
+    echo -e "GET /info HTTP/1.0\r\n" | nc -U /var/run/docker.sock | tail -n +6 | python -m json.tool
+  register: docker_result
+
+- set_fact:
+    docker_info: "{{ docker_result.stdout | from_json }}"
+{% endraw %}
+```
+
+### Swarm manager
+
+Initially we start a swarm manager on the first **manager** host
+
+```yaml
+{% raw %}
+- name: Configure primary swarm manager
+  hosts: managers[0]
+  become: yes
+  become_user: root
+  roles:
+    - role: ansible.secure-docker-daemon
+      dds_host: "{{ vagrant_primary_manager_ip }}"
+      dds_server_cert_path: /etc/default/docker
+      dds_restart_docker: no
+
+  tasks:
+    - name: "Starting primary swarm manager"
+      shell: >
+        docker swarm init --advertise-addr {{ vagrant_primary_manager_ip }}
+      register: init_result
+      when: docker_info.Swarm.LocalNodeState != "active"
+
+{% endraw %}
+```
+
+Each other manager initialises using the manager token described below
+
+### Swarm tokens
+
+Next we register facts for the manager and worker swarm tokens that are needed when we initialise the other hosts.
+
+```yaml
+{% raw %}
+- name: "Retrieve manager token"
+  shell: >
+    docker swarm join-token manager --quiet
+  register: manager_token_result
+
+- set_fact:
+    manager_token: "{{ manager_token_result.stdout }}"
+
+- name: "Retrieve worker token"
+  shell: >
+    docker swarm join-token worker --quiet
+  register: worker_token_result
+
+- set_fact:
+    worker_token: "{{ worker_token_result.stdout }}"
+{% endraw %}
+```
+
+### Swarm workers
+
+Each worker host connects to the primary manager instance using the worker token.
+
+```yaml
+{% raw %}
+- hosts: workers
+  become: yes
+  become_user: root
+  tasks:
+    - name: "Starting swarm workers"
+      shell: >
+        docker swarm join \
+          --token {{ hostvars['manager1']['worker_token'] }} \
+          {{ vagrant_primary_manager_ip }}:{{ swarm_bind_port }}
+      register: init_result
+      when: docker_info.Swarm.LocalNodeState != "active"
+{% endraw %}
+```
+
+### Swarm node labels
+
+Sometimes we want to restrict where Docker services can run. The cleanest way of doing this with our current setup is to associate the Ansible groups with the Docker nodes.
+
+```yaml
+{% raw %}
+- hosts: all
+  serial: 1
+  become: yes
+  become_user: root
+  tasks:
+    - name: "Label nodes"
+      shell: >
+        docker node update --label-add {{ item }}=true {{ inventory_hostname }}
+      when: "item != 'all_groups'"
+      with_items:
+        - "{{ group_names }}"
+      delegate_to: "{{ groups['managers'][0] }}"
+      tags:
+        - label
+{% endraw %}
+```
+
+Node updates should be performed on a manager node. In the above example we run a shell command on all hosts. Since ```docker node update``` needs to be run against a manager node we delegate to the primary manager. We iterate over all the hosts groups ```{% raw %}{{ group_names }}{% endraw %}``` and add a boolean label for each host. This means that we can later restrict services to a named group using ```--constraint 'node.labels.xxxx == true'```
+
+```ruby
+TASK [Label nodes] *************************************************************
+task path: /Users/jamesdmorgan/Projects/vagrant-ansible-docker-swarm/ansible/swarm.yml:122
+skipping: [worker2] => (item=all_groups)  => {"changed": false, "item": "all_groups", "skip_reason": "Conditional check failed", "skipped": true}
+changed: [worker2 -> None] => (item=workers) => {"changed": true, "cmd": "docker node update --label-add workers=true worker2", "delta": "0:00:00.014551", "end": "2016-08-30 10:41:57.119466", "item": "workers", "rc": 0, "start": "2016-08-30 10:41:57.104915", "stderr": "", "stdout": "worker2", "stdout_lines": ["worker2"], "warnings": []}
+```
+
+We skip over the group **all_groups** as it doesn't add any useful semantics.
+
+
+### Swarm status
+
+After all the nodes have been added and labeled the status of the swarm is output
+
+```ruby
+TASK [debug] *******************************************************************
+task path: /Users/jamesdmorgan/Projects/vagrant-ansible-docker-swarm/ansible/swarm.yml:146
+ok: [manager1] => {
+    "docker_swarm_info.Swarm": {
+        "Cluster": {
+            "CreatedAt": "2016-08-30T09:41:51.32899677Z",
+            "ID": "2m72mdv7c8aslr8vpmis615k4",
+            "Spec": {
+                "CAConfig": {
+                    "NodeCertExpiry": 7776000000000000
+                },
+                "Dispatcher": {
+                    "HeartbeatPeriod": 5000000000
+                },
+                "Name": "default",
+                "Orchestration": {
+                    "TaskHistoryRetentionLimit": 5
+                },
+                "Raft": {
+                    "ElectionTick": 3,
+                    "HeartbeatTick": 1,
+                    "LogEntriesForSlowFollowers": 500,
+                    "SnapshotInterval": 10000
+                },
+                "TaskDefaults": {}
+            },
+            "UpdatedAt": "2016-08-30T09:41:51.368332853Z",
+            "Version": {
+                "Index": 11
+            }
+        },
+        "ControlAvailable": true,
+        "Error": "",
+        "LocalNodeState": "active",
+        "Managers": 3,
+        "NodeAddr": "192.168.77.21",
+        "NodeID": "3d5nu66a7nuyjqauz3imkinwz",
+        "Nodes": 6,
+        "RemoteManagers": [
+            {
+                "Addr": "192.168.77.22:2377",
+                "NodeID": "dv4fyiq4mbriyqrace841cybd"
+            },
+            {
+                "Addr": "192.168.77.23:2377",
+                "NodeID": "0cf1851b78xocoymd3kwvqa1p"
+            },
+            {
+                "Addr": "192.168.77.21:2377",
+                "NodeID": "3d5nu66a7nuyjqauz3imkinwz"
+            }
+        ]
+    }
+}
+
+PLAY [managers[0]] ***********************
+```
+
+This shows that there are 3 manager nodes and 6 nodes in total.
+
+### Docker networks
+
+In order for our services to be able to communicate with each over across the different nodes we need to add an [overlay](https://docs.docker.com/engine/userguide/networking/get-started-overlay/ network. As the system gets more complicated its likely we will want to add more to segment the different layers of the system, split frontend traffic from backend etc.
+
+```yaml
+{% raw %}
+- name: Create overlay networks
+  shell: >
+    docker network create -d overlay {{ item }}
+  when: item not in docker_current_networks
+  with_items:
+    - appnet
+{% endraw %}
+```
