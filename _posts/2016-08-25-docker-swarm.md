@@ -169,16 +169,16 @@ Docker 1.12 is installed via curl as per the docker [release](https://github.com
 
 ```yaml
 - name: Check existence of docker
-      stat: path=/usr/lib/systemd/system/docker.service
-      register: install_result
+  stat: path=/usr/lib/systemd/system/docker.service
+  register: install_result
 
 - name: Install docker 1.12
-      shell: >
-        curl -fsSL https://get.docker.com/ | sh
-      when: not install_result.stat.exists
+  shell: >
+    curl -fsSL https://get.docker.com/ | sh
+  when: not install_result.stat.exists
 
-    - name: Start docker service
-      service: name=docker state=started enabled=true
+- name: Start docker service
+  service: name=docker state=started enabled=true
 ```
 
 Before we run the swarm init command we establish whether there is an existing swarm running on this machine. Currently this is done by talking directly to the docker daemon. We know its running as docker as we have previously started it.
@@ -370,7 +370,7 @@ This shows that there are 3 manager nodes and 6 nodes in total.
 
 ### Docker networks
 
-In order for our services to be able to communicate with each over across the different nodes we need to add an [overlay](https://docs.docker.com/engine/userguide/networking/get-started-overlay/ network. As the system gets more complicated its likely we will want to add more to segment the different layers of the system, split frontend traffic from backend etc.
+In order for our services to be able to communicate with each over across the different nodes we need to add an [overlay](https://docs.docker.com/engine/userguide/networking/get-started-overlay/) network. As the system gets more complicated its likely we will want to add more to segment the different layers of the system, split frontend traffic from backend etc.
 
 ```yaml
 {% raw %}
