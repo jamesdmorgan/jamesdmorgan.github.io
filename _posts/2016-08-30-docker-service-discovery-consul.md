@@ -71,8 +71,9 @@ After provisioning consul via Vagrant or running Ansible directly you should be 
 
 It will show itself and any other services you may have running. These will be covered in the next blog post.
 
-## Previous - [Vagrant Ansible Docker Swarm](http://jamesdmorgan.github.io/2016/docker-swarm/)
-## Next - [Centralised Logging - ELK](http://jamesdmorgan.github.io/2016/elastic-stack/)
+## [Previous - Vagrant Ansible Docker Swarm](http://jamesdmorgan.github.io/2016/docker-swarm/)
+
+## [Next - Centralised Logging - ELK](http://jamesdmorgan.github.io/2016/elastic-stack/)
 
 
 
