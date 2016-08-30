@@ -370,6 +370,109 @@ PLAY [managers[0]] ***********************
 
 This shows that there are 3 manager nodes and 6 nodes in total.
 
+Information about the nodes can be obtained by running the ```docker node ls`` command on a manager host
+
+```shell
+$ vagrant ssh manager1
+Last login: Tue Aug 30 10:41:58 2016 from 10.0.2.2
+
+[vagrant@manager1 ~]$ sudo su
+
+[root@manager1 vagrant]# docker node ls
+ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+0cf1851b78xocoymd3kwvqa1p    manager3  Ready   Active        Reachable
+3d5nu66a7nuyjqauz3imkinwz *  manager1  Ready   Active        Leader
+50pxd3u3r3uk7e0navs39w3ui    worker3   Ready   Active
+67wijncvkd002abmt2c9eekem    worker1   Ready   Active
+6j1fzoab9sm1417wjkaudx3w9    worker2   Ready   Active
+dv4fyiq4mbriyqrace841cybd    manager2  Ready   Active        Reachable
+[root@manager1 vagrant]#
+[root@manager1 vagrant]#
+[root@manager1 vagrant]# docker node help
+
+Usage:  docker node COMMAND
+
+Manage Docker Swarm nodes
+
+Options:
+      --help   Print usage
+
+Commands:
+  demote      Demote one or more nodes from manager in the swarm
+  inspect     Display detailed information on one or more nodes
+  ls          List nodes in the swarm
+  promote     Promote one or more nodes to manager in the swarm
+  rm          Remove one or more nodes from the swarm
+  ps          List tasks running on a node
+  update      Update a node
+
+Run 'docker node COMMAND --help' for more information on a command.
+
+[root@manager1 vagrant]# docker node inspect manager1
+[
+    {
+        "ID": "3d5nu66a7nuyjqauz3imkinwz",
+        "Version": {
+            "Index": 41
+        },
+        "CreatedAt": "2016-08-30T09:41:51.329014597Z",
+        "UpdatedAt": "2016-08-30T09:41:55.392224112Z",
+        "Spec": {
+            "Labels": {
+                "managers": "true"
+            },
+            "Role": "manager",
+            "Availability": "active"
+        },
+        "Description": {
+            "Hostname": "manager1",
+            "Platform": {
+                "Architecture": "x86_64",
+                "OS": "linux"
+            },
+            "Resources": {
+                "NanoCPUs": 2000000000,
+                "MemoryBytes": 1929281536
+            },
+            "Engine": {
+                "EngineVersion": "1.12.1",
+                "Plugins": [
+                    {
+                        "Type": "Network",
+                        "Name": "bridge"
+                    },
+                    {
+                        "Type": "Network",
+                        "Name": "host"
+                    },
+                    {
+                        "Type": "Network",
+                        "Name": "null"
+                    },
+                    {
+                        "Type": "Network",
+                        "Name": "overlay"
+                    },
+                    {
+                        "Type": "Volume",
+                        "Name": "local"
+                    }
+                ]
+            }
+        },
+        "Status": {
+            "State": "ready"
+        },
+        "ManagerStatus": {
+            "Leader": true,
+            "Reachability": "reachable",
+            "Addr": "192.168.77.21:2377"
+        }
+    }
+]
+[root@manager1 vagrant]#
+```
+
 ### Docker networks
 
 In order for our services to be able to communicate with each over across the different nodes we need to add an [overlay](https://docs.docker.com/engine/userguide/networking/get-started-overlay/) network. As the system gets more complicated its likely we will want to add more to segment the different layers of the system, split frontend traffic from backend etc.
