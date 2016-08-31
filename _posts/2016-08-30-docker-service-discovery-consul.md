@@ -83,7 +83,7 @@ After provisioning consul via Vagrant or running Ansible directly you should be 
 
 It will show itself and any other services you may have running. These will be covered in the next blog post.
 
-### Next steps
+## Next steps
 - Explore DNS
 - Add heathchecks
 - Build splash page using consul template
