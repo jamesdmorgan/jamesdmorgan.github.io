@@ -40,6 +40,8 @@ Each of these groups can be provisioned separately with Vagrant or directly with
 
 > The project can be found on [**github**](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm)
 
+---
+
 ## Vagrant
 
 The [Vagrantfile](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm/blob/master/Vagrantfile) brings up 6 VirtualBox virtual machines.
@@ -98,6 +100,7 @@ Last login: Thu Aug 25 11:27:47 2016 from 10.0.2.2
 [vagrant@manager1 ~]$ sudo su
 [root@manager1 vagrant]#
 ```
+---
 
 ## Ansible
 
@@ -160,6 +163,8 @@ shell: >
 when: service_dict.name not in docker_current_services
 {% endraw %}
 ```
+
+---
 
 ## Docker Swarm
 

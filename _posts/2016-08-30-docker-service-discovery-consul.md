@@ -24,7 +24,7 @@ Prior to version 1.12 of docker it was necessary to use external tools and servi
 
 Applications like **Consul**, **Zookeeper**, **etcd** and **serf** were used in combination with registration containers like **registrator**.
 
-Version 1.12 of docker introduces multi-host / multi-container networking and [service discovery](https://blog.docker.com/2016/06/docker-1-12-built-in-orchestration/). Containers that are associated with an overlay network can communicate with easy other using the name of the container as the hostname. Requests are balanced using round-robin between the replicas.
+Version 1.12 of docker introduces multi-host / multi-container networking and [service discovery](https://blog.docker.com/2016/06/docker-1-12-built-in-orchestration/). Containers that are associated with an overlay network can communicate with each other using the name of the container as the hostname. Requests are balanced using round-robin between the replicas.
 
 ### Reasons for still using external service discovery.
 
@@ -33,6 +33,8 @@ Version 1.12 of docker introduces multi-host / multi-container networking and [s
 - Consul provides k/v stores, DNS and health checks as well as service discovery
 - Docker services don't work with registrator (at the moment) due to the way ports are managed now.
 
+---
+
 
 ## Consul
 
@@ -40,7 +42,7 @@ Version 1.12 of docker introduces multi-host / multi-container networking and [s
 
 As mentioned above Consul provides much more than just service discovery. It also rates highly against tools such as Zookeeper & etcd. For more information I would recommend reading [The DevOps 2.0 Toolkit](https://leanpub.com/the-devops-2-toolkit) where these tools are evaluated.
 
-#### Endpoint
+### Endpoints
 
 - [UI http://192.168.77.21:8500/](http://192.168.77.21:8500/)
 
