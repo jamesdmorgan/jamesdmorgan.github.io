@@ -46,6 +46,8 @@ docker service create \
   your/container
 ```
 
+> Note that when you use the syslog driver you can no longer use ```docker logs``` on the container.
+
 ### Ansible role.
 
 The [rsyslog](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm/tree/master/ansible/roles/rsyslog) role installs the service and adds logstash configuration. This simple forwards messages to the logstash instance.
