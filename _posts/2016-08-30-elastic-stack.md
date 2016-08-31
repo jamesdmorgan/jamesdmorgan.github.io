@@ -53,7 +53,9 @@ docker service create \
 The [rsyslog](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm/tree/master/ansible/roles/rsyslog) role installs the service and adds logstash configuration. This simple forwards messages to the logstash instance.
 
 ```
+{% raw %}
 *.* @@{{ logstash_host }}:{{ logstash_port }}
+{% endraw %}
 ```
 
 ## ELK / Elastic Stack
