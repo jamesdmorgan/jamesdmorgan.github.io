@@ -42,7 +42,7 @@ The syslog driver is enabled when the service or container is run. In the exampl
 docker service create \
   --name some_service \
   --log-driver syslog \
-  --log-opt tag={% raw %}{% raw %}'{{.ImageName}}/{{.Name}}/{{.ID}}'{% endraw %}{% endraw %} \
+  --log-opt tag={% raw %}'{{.ImageName}}/{{.Name}}/{{.ID}}'{% endraw %} \
   your/container
 ```
 
@@ -50,7 +50,7 @@ docker service create \
 
 ### Ansible role.
 
-The [rsyslog](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm/tree/master/ansible/roles/rsyslog) role installs the service and adds logstash configuration. This simple forwards messages to the logstash instance.
+The [rsyslog](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm/tree/master/ansible/roles/rsyslog) role installs the service and adds logstash configuration. This simply forwards messages to the logstash instance.
 
 ```
 {% raw %}
