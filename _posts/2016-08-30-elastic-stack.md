@@ -42,7 +42,7 @@ The syslog driver is enabled when the service or container is run. In the exampl
 docker service create \
   --name some_service \
   --log-driver syslog \
-  --log-opt tag={% raw %}'{{.ImageName}}/{{.Name}}/{{.ID}}'{% endraw %} \
+  --log-opt tag={% raw %}{% raw %}'{{.ImageName}}/{{.Name}}/{{.ID}}'{% endraw %}{% endraw %} \
   your/container
 ```
 
