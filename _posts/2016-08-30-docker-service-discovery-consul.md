@@ -53,6 +53,12 @@ Since registrator does not currently handle services I decided to create a very 
 
 I am hoping that registrator will be fixed shortly and I can revert to using just that.
 
+#### Features
+
+- Alpine base image with python - very lightweight container
+- docker-py - Listen to docker socket for events and examine containers
+- python-consul - Register / De-register services with local consul agent
+
 ### Provisioning Consul
 
 In the same way that we provisioned the docker swarm. Consul is installed on all nodes in the cluster. On the manager nodes its run as a **server** and on the **workers** as an **agent**. Running multiple servers adds redundancy and demonstrates the high availability functionality. In the same way as swarm we are running 3 servers in order to achieve Quorum.
@@ -70,11 +76,6 @@ After provisioning consul via Vagrant or running Ansible directly you should be 
 <img src="https://raw.githubusercontent.com/jamesdmorgan/vagrant-ansible-docker-swarm/master/images/consul/dashboard-api.png" width="100%">
 
 It will show itself and any other services you may have running. These will be covered in the next blog post.
-
-## [Previous - Vagrant Ansible Docker Swarm](http://jamesdmorgan.github.io/2016/docker-swarm/)
-
-## [Next - Centralised Logging - ELK](http://jamesdmorgan.github.io/2016/elastic-stack/)
-
 
 
 

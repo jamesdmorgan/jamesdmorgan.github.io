@@ -26,10 +26,4 @@ TBC
 
 TBC
 
-## [Previous - Docker Swarm Service Discovery](http://jamesdmorgan.github.io/2016/docker-service-discovery-consul/)
-
-## [Next - Metrics & Monitoring](http://jamesdmorgan.github.io/2016/metrics-and-monitoring)
-
-
-
 

@@ -489,5 +489,3 @@ In order for our services to be able to communicate with each over across the di
     - appnet
 {% endraw %}
 ```
-
-## Next - [Service discovery](http://jamesdmorgan.github.io/2016/docker-service-discovery-consul/)
