@@ -489,3 +489,18 @@ In order for our services to be able to communicate with each over across the di
     - appnet
 {% endraw %}
 ```
+
+### Docker UI
+
+Docker [UI](https://github.com/kevana/ui-for-docker) provides visualisation for the docker daemon.
+
+#### Endpoint
+
+* [http://192.168.77.21:9000/](http://192.168.77.21:9000/)
+
+#### Issues
+
+Having the UI run as a service talking to the docker daemon works though doesn't make a huge amount of sense. Each host has its own UI talking the local daemon. If you hit the swarm endpoint on port 9000 it will round-robin to one of the running UIs.
+
+We could run each UI on a different port and have some means to choose the host we want to look at. We could also just examine the daemon on the primary manager node.
+

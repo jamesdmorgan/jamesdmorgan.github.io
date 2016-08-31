@@ -40,6 +40,10 @@ Version 1.12 of docker introduces multi-host / multi-container networking and [s
 
 As mentioned above Consul provides much more than just service discovery. It also rates highly against tools such as Zookeeper & etcd. For more information I would recommend reading [The DevOps 2.0 Toolkit](https://leanpub.com/the-devops-2-toolkit) where these tools are evaluated.
 
+#### Endpoint
+
+- [UI http://192.168.77.21:8500/](http://192.168.77.21:8500/)
+
 ### Registrator
 
 Registrator is a docker container that listens to the docker daemon for events and registers/de-registers the containers as services in Consul.
