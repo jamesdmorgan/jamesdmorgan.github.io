@@ -58,8 +58,14 @@ The [rsyslog](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm/tree/
 {% endraw %}
 ```
 
+If you are running in production you may want to consider adding a **redis** instance between **rsyslog** and **logstash**. This can add fault tolerance if parts of the chain go down for whatever reason. This can be achieved on AWS using a redis elasticache instance.
+
 ## ELK / Elastic Stack
 
-TBC
+In our basic example we are passing logs directly from the **docker** containers via **rsyslog**, through **logstash** and **elasticsearch** finally to be viewed using **kibana**. The example is more to prove connectivity rather than demonstrate many of the features.
+
+An easy way to verify that all the components are working correctly is to scale the containers using the ```docker service scale``` command. Increasing or decreasing the number of containers across the cluster will generate logs an push data through to elasticsearch.
+
+Each component in the ELK stack is run as a container from [logging.yml](https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm/blob/master/ansible/logging.yml) and **rsyslog** is installed on all hosts. The group **elk** is controlled by the Vagrantfile ```ANSIBLE_GROUPS``` variable.
 
 
